@@ -1,7 +1,7 @@
 import os
 from functools import wraps
 
-from flask import Flask, request, jsonify, render_template, session
+from flask import Flask, request, jsonify, session
 
 from bot_logica import (
     processar_mensagem_chatbot,
@@ -22,7 +22,7 @@ app.secret_key = os.environ.get(
     "dev-only-secret-change-me"  # fallback para ambiente local
 )
 
-# API_KEY opcional (para proteger os endpoints que o Verdi chamará)
+# API_KEY opcional para proteger os endpoints da API.
 API_KEY = os.environ.get("API_KEY", "").strip()
 
 
@@ -49,9 +49,12 @@ def index():
     # se o chat finalizou, limpa estado para não "travar" na próxima visita
     if session.get("chat_state", {}).get("stage") == "fim":
         session.pop("chat_state", None)
-    # Se não existir template, comente a linha abaixo e retorne algo simples:
-    # return "MeliBuy API online"
-    return render_template("index.html")
+    return jsonify({
+        "service": "Meli",
+        "status": "ok",
+        "message": "API do Meli online",
+        "endpoints": ["/health", "/chat", "/categorias", "/materiais", "/fornecedores"],
+    })
 
 
 @app.route("/health")
@@ -61,7 +64,7 @@ def health():
 
 
 # -----------------------------------------------------------------------------
-# Endpoints "finos" para o Verdi Flow (HTTP GET)
+# Endpoints de consulta (HTTP GET)
 # -----------------------------------------------------------------------------
 @app.route("/categorias", methods=["GET"])
 @require_api_key

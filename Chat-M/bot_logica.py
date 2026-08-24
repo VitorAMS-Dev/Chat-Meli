@@ -121,7 +121,7 @@ def processar_mensagem_chatbot(mensagem_usuario, chat_state):
             return resposta_bot, chat_state 
 
         elif "não" in mensagem_usuario_lower:
-            resposta_bot = "Obrigado por usar o MeliBuy! Até mais 👋"
+            resposta_bot = "Obrigado por usar o Meli! Até mais 👋"
             chat_state['stage'] = 'fim'
             chat_state['last_reply'] = resposta_bot
             conn.close()
@@ -166,11 +166,11 @@ def processar_mensagem_chatbot(mensagem_usuario, chat_state):
     # Lógica principal baseada nos demais estágios da conversa
     elif current_stage == 'aguardando_categoria': # Responsável em apresentar a lista de categorias
         if chat_state.get('initial_greeting_sent', False) == False:
-            resposta_bot = "Olá! Sou MeliBuy, vou te ajudar a encontrar o melhor fornecedor para sua negociação."
+            resposta_bot = "Olá! Sou o Meli, vou te ajudar a encontrar o melhor fornecedor para sua negociação."
             chat_state['initial_greeting_sent'] = True
         
         elif "olá" in mensagem_usuario_lower or "oi" in mensagem_usuario_lower or "ola" in mensagem_usuario_lower:
-             resposta_bot = "Olá! Sou MeliBuy, vou te ajudar a encontrar o melhor fornecedor para sua negociação."
+             resposta_bot = "Olá! Sou o Meli, vou te ajudar a encontrar o melhor fornecedor para sua negociação."
   
         if "escolha uma categoria" not in resposta_bot.lower():
             resposta_bot += "\n\nPara começar, por favor, escolha uma categoria:"

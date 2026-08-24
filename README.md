@@ -1,31 +1,25 @@
-# 👋 Olá, eu sou Vitor Almeida
+# Meli
 
-## 💼 Perfil Profissional
+API em Python para o chat Meli, que consulta categorias, materiais e os melhores
+fornecedores por estado usando Flask e SQLite.
 
-- 💻 Estudante de Programação
-- 🌱 Apaixonado por Tecnologia
-- 🎓 FORMADO ADS - Universidade da Cidade De São Paulo <br>
-      Cursanddo Engenharia de Software - FIAP
+## Executar
 
-##  Habilidades
+```powershell
+cd Chat-M
+python -m pip install flask
+python app.py
+```
 
-Aqui estão algumas das linguagens de programação e tecnologias que estou familiarizado:
+A API ficará disponível em `http://127.0.0.1:5000`.
 
-##  Linguagens: 
-[![My Skills](https://skillicons.dev/icons?i=java,python,javascript,php,c,cpp)](https://skillicons.dev)
+## Rotas
 
-##  Frameworks: 
-[![My Skills](https://skillicons.dev/icons?i=react,django,docker,gradle,nodejs,spring)](https://skillicons.dev)
+- `GET /health`: verifica se a API está disponível.
+- `GET /categorias`: lista as categorias cadastradas.
+- `GET /materiais?categoria=...`: lista materiais de uma categoria.
+- `GET /fornecedores?material=...&estado=...`: retorna até três fornecedores.
+- `POST /chat`: conduz a consulta conversacional do Meli.
 
-##  Bancos de Dados: 
-[![My Skills](https://skillicons.dev/icons?i=mysql,mongo,aws,sqlite,postgres)](https://skillicons.dev)
-##  Ferramentas:
-[![My Skills](https://skillicons.dev/icons?i=git,github,vscode,eclipse,idea)](https://skillicons.dev)<br><br>
-
-##  Contato
-
-![Gmail Badge](https://img.shields.io/badge/-{vitoralmeida.dms@gmail.com}-006bed?style=flat-square&logo=Gmail&logoColor=white&link=mailto:{vitoralmeida.dms@gmail.com})
-[![Linkedin:Vitor Almeida](https://img.shields.io/badge/-Vitor_Almeida-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/devellenias/)](https://www.linkedin.com/in/vitor-almeida-de-meira-santos/)
-
-
-Fique à vontade para entrar em contato comigo para discutir colaborações, projetos interessantes ou qualquer outro assunto relacionado à programação. Estou ansioso para ouvir de você! 😊
+O endpoint `/chat` recebe `{ "message": "texto" }`. Se `API_KEY` estiver
+configurada, envie também o cabeçalho `X-API-KEY`.
